@@ -64,14 +64,17 @@ function renderTablero() {
                         ${pl.alergenos && pl.alergenos.length > 0 ? 
                             `<span class="alerta-cocina alerta-alergeno">⚠️ ALÉRGENOS: ${pl.alergenos.join(', ')}</span>` : ''}
                         
-                        <!-- 3. BOTONES DE ACCIÓN POR PLATO AL FINAL DEL PLATO -->
+                        <!-- 3. BOTONES DE ACCIÓN CON VALIDACIÓN DE FLUJO -->
                         <div class="controles-plato">
                             ${!isPrep && !isListo ? 
                                 `<button class="btn-cambio-estado btn-preparar" onclick="cambiarEstadoPlato('${pedido.codigo}', ${idx}, 'En preparación')">Cocinar</button>` : ''}
                             
-                            ${!isListo ? 
-                                `<button class="btn-cambio-estado btn-listo" onclick="cambiarEstadoPlato('${pedido.codigo}', ${idx}, 'Listo para servir')">Listo</button>` : 
-                                '<b style="color:green; font-size:0.8rem">✓ TERMINADO</b>'}
+                            <!-- VALIDACIÓN: Solo se muestra "Listo" si ya se está cocinando -->
+                            ${isPrep ? 
+                                `<button class="btn-cambio-estado btn-listo" onclick="cambiarEstadoPlato('${pedido.codigo}', ${idx}, 'Listo para servir')">Listo</button>` : ''}
+                            
+                            ${isListo ? 
+                                '<b style="color:green; font-size:0.8rem">✓ TERMINADO</b>' : ''}
                         </div>
                     </div>`;
                 }).join('')}
@@ -91,7 +94,6 @@ function renderTablero() {
     });
 }
 
-// ... (Funciones cambiarEstadoPlato y finalizarPedidoCompleto se mantienen igual)
 function cambiarEstadoPlato(cod, idx, nuevo) {
     let pedidos = JSON.parse(localStorage.getItem(KEY_PEDIDOS));
     const p = pedidos.find(x => x.codigo === cod);

@@ -198,3 +198,11 @@
     border-color: var(--color-maiz);
     box-shadow: 0 0 0 3px rgba(196, 181, 121, 0.2);
 }
+
+.controles-plato {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.8rem;
+    min-height: 35px; /* Mantiene el espacio aunque el botón desaparezca */
+    align-items: center;
+}
