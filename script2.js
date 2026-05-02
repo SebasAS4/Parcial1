@@ -1,6 +1,6 @@
 /* ─────────────────── STORAGE KEYS ─────────────────── */
 const KEY_PEDIDOS = 'sc_pedidos';
-const KEY_PLATOS  = 'platos';   // Ahora sí coincide con el de tu amigo
+const KEY_PLATOS  = 'platos';   // Clave correcta de tu compañero
 
 /* ─────────────────── STATE ─────────────────── */
 let pedidos   = JSON.parse(localStorage.getItem(KEY_PEDIDOS) || '[]');
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function cargarPlatosDesdeStorage() {
   const raw = JSON.parse(localStorage.getItem(KEY_PLATOS) || '[]');
-  // Solo platos activos
   platos = raw.filter(p => (p.estado || '').toLowerCase() === 'activo' || p.activo === true);
   poblarSelectPlatos();
 }
@@ -44,13 +43,20 @@ function poblarSelectPlatos() {
   });
 }
 
-/* ─────────────────── CÓDIGO AUTOMÁTICO ─────────────────── */
+/* ─────────────────── CÓDIGO AUTOMÁTICO BLINDADO ─────────────────── */
 function generarCodigo() {
-  const ultimo = pedidos.length > 0
-    ? parseInt(pedidos[pedidos.length-1].codigo.replace('PED','')) || 0
-    : 0;
-  const num = String(ultimo + 1).padStart(3,'0');
-  document.getElementById('codPedido').value = 'PED' + num;
+  let maxId = 0;
+  // Escaneamos todos los pedidos para encontrar el número más alto real
+  pedidos.forEach(p => {
+    if(p.codigo) {
+      const num = parseInt(p.codigo.replace('PED',''));
+      if(!isNaN(num) && num > maxId) {
+        maxId = num;
+      }
+    }
+  });
+  const numStr = String(maxId + 1).padStart(3, '0');
+  document.getElementById('codPedido').value = 'PED' + numStr;
 }
 
 function actualizarFecha() {
@@ -85,10 +91,6 @@ function setPriority(btn) {
     document.getElementById('justificacion').value = '';
     clearErr('justificacion');
   }
-
-  // Sugerencia automática de prioridad por tiempo
-  const tiempoTotal = carritoActual.reduce((s,i) => s + (i.tiempo * i.cantidad), 0);
-  // Solo sugiere si no forzó urgente manualmente
 }
 
 /* ─────────────────── CARRITO ─────────────────── */
@@ -107,14 +109,12 @@ function agregarPlato() {
   const alerg  = JSON.parse(opt.dataset.alergenos || '[]');
   const cod    = sel.value;
 
-  // Si ya existe el mismo plato + obs idéntica, suma cantidad
   const exist = carritoActual.find(i => i.codigo === cod && i.obs === obs);
   if (exist) { exist.cantidad += cant; }
   else {
     carritoActual.push({ codigo:cod, nombre, precio, cantidad:cant, obs, tiempo, alergenos:alerg });
   }
 
-  // Sugerir prioridad automática
   sugerirPrioridad();
   renderCarrito();
   sel.value = '';
@@ -125,46 +125,50 @@ function agregarPlato() {
 
 function sugerirPrioridad() {
   const tiempoTotal = carritoActual.reduce((s,i) => s + (i.tiempo * i.cantidad), 0);
-  if (!prioridadSel) { // Solo sugiere si no hay prioridad elegida
+  if (!prioridadSel) { 
     let sug = tiempoTotal > 40 ? 'Urgente' : tiempoTotal >= 20 ? 'Alta' : 'Normal';
     const btn = document.querySelector(`.priority-pill[data-val="${sug}"]`);
     if (btn) setPriority(btn);
   }
 }
 
+// Eliminación corregida
 function quitarPlato(idx) {
-  carritoActual.splice(idx,1);
+  carritoActual.splice(idx, 1);
   renderCarrito();
 }
 
 function renderCarrito() {
   const list  = document.getElementById('dishList');
-  const empty = document.getElementById('emptyDish');
   const total = document.getElementById('totalRow');
   const totalD= document.getElementById('totalDisplay');
 
+  // Si el carrito está vacío, inyectamos el HTML directamente y ocultamos el total
   if (!carritoActual.length) {
-    empty.style.display = 'block';
+    list.innerHTML = '<p class="empty-dish" id="emptyDish">No hay platos en este pedido aún.</p>';
     total.style.display = 'none';
-    list.innerHTML = '';
-    list.appendChild(empty);
     return;
   }
-  empty.style.display = 'none';
-  list.innerHTML = carritoActual.map((item,i) => {
+
+  // Si hay platos, los dibujamos
+  list.innerHTML = carritoActual.map((item, i) => {
     const sub = (item.precio * item.cantidad).toFixed(2);
-    const alg = item.alergenos.length ? `<br><span style="font-size:.75rem;color:var(--warn);">⚠ ${item.alergenos.join(', ')}</span>` : '';
+    // Verificamos que alergenos exista para evitar errores con los datos de tu compañero
+    const alg = (item.alergenos && item.alergenos.length) ? `<br><span style="font-size:.75rem;color:var(--warn);">⚠ ${item.alergenos.join(', ')}</span>` : '';
     const obs = item.obs ? `<br><em>${item.obs}</em>` : '';
+    
+    // El botón de eliminar ahora tiene type="button" para no recargar la página
     return `<div class="dish-item">
       <div class="dish-name">${item.nombre}${alg}${obs}</div>
       <div class="dish-qty">${item.cantidad}</div>
       <div class="dish-price">S/ ${item.precio.toFixed(2)}</div>
       <div class="dish-sub">S/ ${sub}</div>
       <div class="dish-obs">${item.tiempo} min</div>
-      <button class="btn-remove" onclick="quitarPlato(${i})" title="Eliminar">✕</button>
+      <button type="button" class="btn-remove" onclick="quitarPlato(${i})" title="Eliminar">✕</button>
     </div>`;
   }).join('');
 
+  // Calculamos el total y lo mostramos
   const totalNum = carritoActual.reduce((s,i) => s + i.precio * i.cantidad, 0);
   totalD.textContent = 'S/ ' + totalNum.toFixed(2);
   total.style.display = 'flex';
@@ -192,23 +196,29 @@ function validarFormulario() {
   const mozo = document.getElementById('mozo').value.trim();
   const mesa = parseInt(document.getElementById('numMesa').value);
 
-  // Mozo
-  if (!mozo || mozo.length < 3) { showErr('mozo'); ok = false; }
+  if (!mozo || mozo.length < 3) { showErr('mozo', 'Ingresa el nombre del mozo (mín. 3 letras).'); ok = false; }
   else if (/^\d+$/.test(mozo))  { showErr('mozo','El nombre del mozo no puede ser solo números.'); ok = false; }
 
-  // Mesa
-  if (!mesa || mesa < 1 || mesa > 50 || isNaN(mesa)) { showErr('mesa'); ok = false; }
-
-  // Prioridad
-  if (!prioridadSel) { showErr('prioridad','Selecciona un nivel de prioridad.'); ok = false; }
-
-  // Justificación urgente
-  if (prioridadSel === 'Urgente') {
-    const just = document.getElementById('justificacion').value.trim();
-    if (!just || just.length < 10) { showErr('justificacion'); ok = false; }
+  // Validación de Mesa Ocupada
+  if (!mesa || mesa < 1 || mesa > 50 || isNaN(mesa)) { 
+    showErr('mesa', 'Ingresa una mesa válida (1-50).'); 
+    ok = false; 
+  } else {
+    // Revisamos si la mesa está activa en otro pedido
+    const mesaOcupada = pedidos.some(p => p.mesa === mesa && ['Registrado', 'Enviado a cocina', 'En preparación', 'Listo para servir'].includes(p.estado));
+    if (mesaOcupada) {
+      showErr('mesa', '¡Esta mesa ya tiene un pedido en curso!');
+      ok = false;
+    }
   }
 
-  // Platos
+  if (!prioridadSel) { showErr('prioridad','Selecciona un nivel de prioridad.'); ok = false; }
+
+  if (prioridadSel === 'Urgente') {
+    const just = document.getElementById('justificacion').value.trim();
+    if (!just || just.length < 10) { showErr('justificacion', 'Justificación mínima 10 caracteres.'); ok = false; }
+  }
+
   if (!carritoActual.length) {
     document.getElementById('err-platos').style.display = 'block';
     ok = false;
@@ -268,7 +278,7 @@ function resetForm() {
 function renderStats() {
   const tots = {
     total: pedidos.length,
-    activos: pedidos.filter(p => !['Cancelado','Entregado'].includes(p.estado)).length,
+    activos: pedidos.filter(p => !['Cancelado','Entregado', 'Facturado'].includes(p.estado)).length,
     urgentes: pedidos.filter(p => p.prioridad === 'Urgente' && p.estado !== 'Cancelado').length,
     cocina: pedidos.filter(p => ['Enviado a cocina','En preparación'].includes(p.estado)).length
   };
@@ -333,10 +343,10 @@ function renderTabla() {
       <td><span class="badge ${bEst}">${p.estado}</span></td>
       <td>
         <div class="actions-cell">
-          <button class="btn-xs btn-xs-outline" onclick="verDetalle('${p.codigo}')">Ver</button>
-          ${puedeEnviar  ? `<button class="btn-xs btn-xs-warn" onclick="enviarCocina('${p.codigo}')">→ Cocina</button>` : ''}
-          ${puedeEntregar? `<button class="btn-xs btn-xs-green" onclick="marcarEntregado('${p.codigo}')">Entregar</button>` : ''}
-          ${puedeCancelar? `<button class="btn-xs btn-xs-red" onclick="cancelarPedido('${p.codigo}')">Cancelar</button>` : ''}
+          <button type="button" class="btn-xs btn-xs-outline" onclick="verDetalle('${p.codigo}')">Ver</button>
+          ${puedeEnviar  ? `<button type="button" class="btn-xs btn-xs-warn" onclick="enviarCocina('${p.codigo}')">→ Cocina</button>` : ''}
+          ${puedeEntregar? `<button type="button" class="btn-xs btn-xs-green" onclick="marcarEntregado('${p.codigo}')">Entregar</button>` : ''}
+          ${puedeCancelar? `<button type="button" class="btn-xs btn-xs-red" onclick="cancelarPedido('${p.codigo}')">Cancelar</button>` : ''}
         </div>
       </td>
     </tr>`;
