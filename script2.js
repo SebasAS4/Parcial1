@@ -1,6 +1,6 @@
 /* ─────────────────── STORAGE KEYS ─────────────────── */
 const KEY_PEDIDOS = 'sc_pedidos';
-const KEY_PLATOS  = 'sc_platos';   // Módulo 1 guarda aquí
+const KEY_PLATOS  = 'platos';   // Ahora sí coincide con el de tu amigo
 
 /* ─────────────────── STATE ─────────────────── */
 let pedidos   = JSON.parse(localStorage.getItem(KEY_PEDIDOS) || '[]');
