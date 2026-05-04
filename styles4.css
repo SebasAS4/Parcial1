@@ -162,5 +162,7 @@ input[type="number"], select, textarea {
 .nav-btn.active {
     background-color: #4b633a !important; /* El verde oscuro de tu marca */
     color: white !important;
-    font-weight: bold;
+    font-weight: 500 !important; 
+    /* Opcional: un ajuste fino para que la letra no se vea apretada */
+    letter-spacing: 0.2px;
 }
