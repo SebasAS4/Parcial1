@@ -10,19 +10,22 @@ Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiv
 <div align="center">
   <img src="ruta/a/tu/foto-equipo.jpg" alt="Fotografía del Equipo San Choclito" width="600" style="border-radius: 10px;">
   <br>
-  <i>De izquierda a derecha: [Nombre 1], [Nombre 2], [Nombre 3] y [Nombre 4].</i>
+  
 </div>
 
 ---
 
 ## 👨‍💻 Integrantes
 
-| Foto | Nombre | Módulo Principal |
-| :---: | :--- | :--- |
-| <img src="ruta/a/tu/foto-junior.jpg" width="80" style="border-radius:50%"> | **Junior Moises Aliaga Cueva** | Módulo de Pedidos e Integración UI |
-| <img src="ruta/a/foto-integrante2.jpg" width="80" style="border-radius:50%"> | **Rodrigo Sebastian Asmat Mendoza** | Módulo de Platos |
-| <img src="ruta/a/foto-integrante3.jpg" width="80" style="border-radius:50%"> | **Blanca Melisa Bustos Montañez** | Módulo de Cocina |
-| <img src="ruta/a/foto-integrante4.jpg" width="80" style="border-radius:50%"> | **Maria Rebeca de la Cruz Antezana** | Módulo de Facturación |
+ ## 👨‍💻 Integrantes
+
+| Nombre                               | Módulo Principal                   |
+| :----------------------------------- | :--------------------------------- |
+| **Junior Moises Aliaga Cueva**       | Módulo de Pedidos e Integración UI |
+| **Rodrigo Sebastian Asmat Mendoza**  | Módulo de Platos                   |
+| **Blanca Melisa Bustos Montañez**    | Módulo de Cocina                   |
+| **Maria Rebeca de la Cruz Antezana** | Módulo de Facturación              |
+
 
 ---
 ## 🧩 Módulos Desarrollados
@@ -49,10 +52,46 @@ Para asegurar una entrega eficiente y ordenada con control de versiones, el equi
 
 ## 🚀 Instrucciones para Ejecutar el Proyecto
 
-Dado que es un proyecto **Frontend** desarrollado con HTML5, CSS3 y Vanilla JavaScript, no requiere de la instalación de dependencias, servidores complejos ni bases de datos externas.
+### 📋 Paso a paso
+ 
+**Clonar el repositorio:**
+```bash
+git clone https://github.com/tu-usuario/san-choclito.git
+cd san-choclito
+```
+ 
+**Abrir el proyecto:**
+ 
+**Opción A — Con VS Code + Live Server *(recomendado)*:**
+```
+1. Abrir la carpeta del proyecto en VS Code
+2. Clic derecho sobre index.html → "Open with Live Server"
+```
+ 
+**Opción B — Directamente en el navegador:**
+```
+Abrir el archivo index.html con doble clic desde el explorador de archivos
+```
+ 
+> ⚠️ Se recomienda Live Server para evitar restricciones de CORS al leer localStorage entre páginas.
+ 
+---
 
-**Paso a paso:**
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/tu-usuario/san-choclito.git](https://github.com/tu-usuario/san-choclito.git)
+### 🔄 Flujo de uso
+```
+Home → Platos (registrar platos) → Pedidos (crear pedido)
+     → Cocina (gestionar preparación) → Facturación (cerrar cuenta)
+```
+---
+ 
+### 💾 Almacenamiento de datos
+ 
+Los datos se guardan automáticamente en `localStorage` del navegador bajo las claves:
+ 
+| Clave | Descripción |
+|---|---|
+| `platos` | Platos registrados en el sistema |
+| `sc_pedidos` | Pedidos creados por los mozos |
+ 
+> 🧹 **Para limpiar todos los datos durante pruebas:**  
+> `F12 → Application → Local Storage → clic derecho → Clear`
