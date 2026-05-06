@@ -20,9 +20,9 @@ Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiv
 | Foto | Nombre | Módulo Principal |
 | :---: | :--- | :--- |
 | <img src="ruta/a/tu/foto-junior.jpg" width="80" style="border-radius:50%"> | **Junior Moises Aliaga Cueva** | Módulo de Pedidos e Integración UI |
-| <img src="ruta/a/foto-integrante2.jpg" width="80" style="border-radius:50%"> | **[Nombre Integrante 2]** | Módulo de Platos |
-| <img src="ruta/a/foto-integrante3.jpg" width="80" style="border-radius:50%"> | **[Nombre Integrante 3]** | Módulo de Cocina |
-| <img src="ruta/a/foto-integrante4.jpg" width="80" style="border-radius:50%"> | **[Nombre Integrante 4]** | Módulo de Facturación |
+| <img src="ruta/a/foto-integrante2.jpg" width="80" style="border-radius:50%"> | **Rodrigo Sebastian Asmat Mendoza** | Módulo de Platos |
+| <img src="ruta/a/foto-integrante3.jpg" width="80" style="border-radius:50%"> | **Blanca Melisa Bustos Montañez** | Módulo de Cocina |
+| <img src="ruta/a/foto-integrante4.jpg" width="80" style="border-radius:50%"> | **Maria Rebeca de la Cruz Antezana** | Módulo de Facturación |
 
 ---
 ## 🧩 Módulos Desarrollados
@@ -41,9 +41,9 @@ El proyecto se divide en 4 módulos principales que se comunican entre sí media
 Para asegurar una entrega eficiente y ordenada con control de versiones, el equipo distribuyó el trabajo de la siguiente manera:
 
 * **Junior Moises Aliaga Cueva:** Desarrollo lógico y visual del **Módulo de Pedidos**. Encargado de la lógica matemática del carrito, validación de prioridades y estandarización del diseño global (CSS) para asegurar la uniformidad en todo el sistema.
-* **[Nombre Integrante 2]:** Estructuración y lógica del **Módulo de Platos**. Creación del CRUD base para alimentar la carta del restaurante.
-* **[Nombre Integrante 3]:** Desarrollo interactivo del **Módulo de Cocina**. Manejo de arrays en JavaScript para actualizar y filtrar el estado de las órdenes.
-* **[Nombre Integrante 4]:** Implementación del **Módulo de Facturación**. Cálculos finales y cierre de procesos.
+* **Rodrigo Sebastian Asmat Mendoza:** Estructuración y lógica del **Módulo de Platos**. Creación del CRUD base para alimentar la carta del restaurante.
+* **Blanca Melisa Bustos Montañez:** Desarrollo interactivo del **Módulo de Cocina**. Manejo de arrays en JavaScript para actualizar y filtrar el estado de las órdenes.
+* **Maria Rebeca de la Cruz Antezana:** Implementación del **Módulo de Facturación**. Cálculos finales y cierre de procesos.
 
 ---
 
