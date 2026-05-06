@@ -20,7 +20,7 @@ Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiv
 | Nombre                               | Módulo Principal                   |
 | :----------------------------------- | :--------------------------------- |
 | **Rodrigo Sebastian Asmat Mendoza**       | Módulo de Platos |
-| **Junior Moises Aliaga Cueva**  | Módulo de Pedidos e Integración UI                   |
+| **Junior Moises Aliaga Cueva**  | Módulo de Pedidos                    |
 | **Blanca Melisa Bustos Montañez**    | Módulo de Cocina                   |
 | **Maria Rebeca de la Cruz Antezana** | Módulo de Facturación              |
 
