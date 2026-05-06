@@ -79,6 +79,7 @@ function buscarPedidosMesa() {
                 nombre: plato.nombre,
                 cant: plato.cantidad,
                 precio: plato.precio,
+                obs: plato.obs || '-', // <--- AGREGA ESTO
                 mozo: p.mozo
             });
         });
@@ -96,7 +97,7 @@ function renderizarPedidos(lista) {
     lista.forEach(item => {
         const sub = item.cant * item.precio;
         subtotalGeneral += sub;
-        tablaCuerpo.innerHTML += `<tr><td>${item.codigo}</td><td>${item.nombre}</td><td>${item.cant}</td><td>S/ ${item.precio.toFixed(2)}</td><td>S/ ${sub.toFixed(2)}</td><td>${item.mozo}</td></tr>`;
+        tablaCuerpo.innerHTML += `<tr><td>${item.codigo}</td><td>${item.nombre}</td><td>${item.cant}</td><td>S/ ${item.precio.toFixed(2)}</td><td>S/ ${sub.toFixed(2)}</td><td>${item.obs || '-'}</td><td>${item.mozo}</td></tr>`;
     });
     resumenConsumo.classList.remove('hidden');
     calcularTotalFinal();
