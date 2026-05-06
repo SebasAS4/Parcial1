@@ -17,8 +17,6 @@ Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiv
 
 ## 👨‍💻 Integrantes
 
- ## 👨‍💻 Integrantes
-
 | Nombre                               | Módulo Principal                   |
 | :----------------------------------- | :--------------------------------- |
 | **Junior Moises Aliaga Cueva**       | Módulo de Pedidos e Integración UI |
