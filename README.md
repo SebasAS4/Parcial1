@@ -41,7 +41,7 @@ El proyecto se divide en 4 módulos principales que se comunican entre sí media
 
 Para asegurar una entrega eficiente y ordenada con control de versiones, el equipo distribuyó el trabajo de la siguiente manera:
 
-* **Junior Moises Aliaga Cueva:** Desarrollo lógico y visual del **Módulo de Pedidos**. Encargado de la lógica matemática del carrito, validación de prioridades y estandarización del diseño global (CSS) para asegurar la uniformidad en todo el sistema.
+* **Junior Moises Aliaga Cueva:** Desarrollo lógico y visual del **Módulo de Pedidos**. Encargado de la lógica matemática del carrito, validación de prioridades y estandarización del diseño en la sección pedidos con la home.
 * **Rodrigo Sebastian Asmat Mendoza:** Estructuración y lógica del **Módulo de Platos**. Creación del CRUD base para alimentar la carta del restaurante.
 * **Blanca Melisa Bustos Montañez:** Desarrollo interactivo del **Módulo de Cocina**. Manejo de arrays en JavaScript para actualizar y filtrar el estado de las órdenes.
 * **Maria Rebeca de la Cruz Antezana:** Implementación del **Módulo de Facturación**. Cálculos finales y cierre de procesos.
