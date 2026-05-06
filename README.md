@@ -3,7 +3,7 @@
 ## 📖 Descripción del Sistema
 El **Panel de Control San Choclito** es una aplicación web Frontend diseñada para optimizar y gestionar las operaciones diarias de un restaurante. El sistema permite la administración integral del menú, el registro de pedidos por mesa, la visualización de órdenes en cocina y la facturación. 
 
-Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiva e intuitiva, asegurando una experiencia fluida. Este proyecto fue desarrollado como parte de la evaluación parcial del curso de Desarrollo Web (Ciclo 2026-1).
+Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiva e intuitiva, asegurando una experiencia fluida. Este proyecto fue desarrollado como parte de la evaluación parcial del curso de Sistemas de Información (Ciclo 2026-1).
 
 ## 📸 Fotografía del Equipo
 
