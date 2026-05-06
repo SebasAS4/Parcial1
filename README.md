@@ -42,7 +42,7 @@ El proyecto se divide en 4 módulos principales que se comunican entre sí media
 Para asegurar una entrega eficiente y ordenada con control de versiones, el equipo distribuyó el trabajo de la siguiente manera:
 
 * **Rodrigo Sebastian Asmat Mendoza:** Estructuración y lógica del **Módulo de Platos**. Creación del CRUD base para alimentar la carta del restaurante y enviar datos al módulo de pedidos.
-* **Junior Moises Aliaga Cueva:** Desarrollo lógico y visual del **Módulo de Pedidos**. Encargado de la lógica matemática del carrito, validación de prioridades y estandarización del diseño.
+* **Junior Moises Aliaga Cueva:** Desarrollo lógico y visual del **Módulo de Pedidos**. Encargado de la lógica matemática del carrito y validación de prioridades. 
 * **Blanca Melisa Bustos Montañez:** Desarrollo interactivo del **Módulo de Cocina**. Manejo de arrays en JavaScript para actualizar y filtrar el estado de las órdenes.
 * **Maria Rebeca de la Cruz Antezana:** Implementación del **Módulo de Facturación**. Cálculos finales y cierre de procesos.
 
