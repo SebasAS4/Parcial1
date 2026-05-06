@@ -8,7 +8,7 @@ Todo el sistema está diseñado bajo una interfaz de usuario uniforme, responsiv
 ## 📸 Fotografía del Equipo
 
 <div align="center">
-  <img src="Gemini_Generated_Image_nkhqe6nkhqe6nkhq.png" alt="Fotografía del Equipo San Choclito" width="600" style="border-radius: 10px;">
+  <img src="equipo.jpeg" alt="Fotografía del Equipo San Choclito" width="600" style="border-radius: 10px;">
   <br>
   
 </div>
